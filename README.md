@@ -14,18 +14,17 @@ $$g = \gcd( a, b ).$$
 
 The reference implementation for this calculation scales poorly with system size.
 However, by use of the identities\
-$$gcd(a, b) = \sum_{k|a, k|b} \varphi (k),$$
-\where $\varphi (k)$ is Euler's Totient function, and\
+$$gcd(a, b) = \sum_{k|a, k|b} \varphi (k),$$\
+where $\varphi (k)$ is Euler's Totient function, and\
 $$\text{lcm} (a,b) = \frac{a \cdot b}{\gcd (a, b)}$$
 
 The equation may be reformulated entirely in terms of $\varphi (k)$, such that\
-$$S_n = \sum_{g=1}^{(n-1)/2} \frac{g}{\gcd (g, n) } \sum_{k=2}^{(n-1)/g} \left[ n \varphi (k) - g  k \varphi (k) \right].$$
-\This can be written in the form:\
-$$S_n = \sum_{g=1}^{(n-1)/2} \frac{g}{\gcd (g, n) } \left[ n \Phi \left( \frac{n-1}{g} \right) - g  \tilde{\Phi} \left( \frac{n-1}{g} \right) \right],$$
-\where\
-$$\Phi (m) = \sum_{k=2}^{m} \varphi (k)$$
-\
-$$\tilde{\Phi} (m) = \sum_{k=2}^{m} k \varphi (k)$$
+$$S_n = \sum_{g=1}^{(n-1)/2} \frac{g}{\gcd (g, n) } \sum_{k=2}^{(n-1)/g} \left[ n \varphi (k) - g  k \varphi (k) \right].$$\
+This can be written in the form:\
+$$S_n = \sum_{g=1}^{(n-1)/2} \frac{g}{\gcd (g, n) } \left[ n \Phi \left( \frac{n-1}{g} \right) - g  \tilde{\Phi} \left( \frac{n-1}{g} \right) \right],$$\
+where\
+$$\Phi (m) = \sum_{k=2}^{m} \varphi (k)$$\
+$$\tilde{\Phi} (m) = \sum_{k=2}^{m} k \varphi (k)$$\
 For which the values $\lbrace \varphi (k) \rbrace$, $\lbrace \Phi (m) \rbrace$, and $\lbrace \tilde{\Phi} (m) \rbrace$ can be precomputed. 
 
 This reformulation drastically reduces scaling, making the computation efficient for large values of $n$.
