@@ -56,25 +56,29 @@ fn totient_sieve(n: u128) -> Vec<u128> {
     phi
 }
 
-fn prefix_sums(phi: &[u128]) -> (Vec<u128>, Vec<u128>) {
+fn sums(phi: &[u128]) -> (Vec<u128>, Vec<u128>) {
     let n = phi.len() - 1;
-    let mut prefix_phi = vec![0; n + 1];
-    let mut prefix_k = vec![0; n + 1];
+    let mut sum_phi = vec![0; n + 1];
+    let mut sum_k_phi = vec![0; n + 1];
 
     for i in 1..=n {
-        prefix_phi[i] = prefix_phi[i - 1] + phi[i];
-        prefix_k[i] = prefix_k[i - 1] + (i as u128) * phi[i];
+        sum_phi[i] = sum_phi[i - 1] + phi[i];
+        sum_k_phi[i] = sum_k_phi[i - 1] + (i as u128) * phi[i];
     }
 
-    (prefix_phi, prefix_k)
+    (sum_phi, sum_k_phi)
 }
 
 
 
 fn run_calculation(n: u128) -> u128 {
+    if n == 0 {
+        return 0;
+    }
+
     let phi = totient_sieve(n);
 
-    let (prefix_phi, prefix_k) = prefix_sums(&phi);
+    let (prefix_sum_phi, prefix_sum_k_phi) = sums(&phi);
 
     let mut ans = 0;
     let limit = (n - 1) / 2;
@@ -86,14 +90,14 @@ fn run_calculation(n: u128) -> u128 {
             continue;
         }
 
-        let sum_phi = prefix_phi[m as usize] - prefix_phi[1];
-        let sum_k = prefix_k[m as usize] - prefix_k[1];
+        let sum_phi = prefix_sum_phi[m as usize] - prefix_sum_phi[1];
+        let sum_k_phi = prefix_sum_k_phi[m as usize] - prefix_sum_k_phi[1];
 
         let d = gcd(g, n);
         let factor = g / d;
 
         let t1 = n * sum_phi;
-        let t2 = g * sum_k;
+        let t2 = g * sum_k_phi;
         if t2 > t1 {
             panic!("Negative term");
         }
@@ -162,11 +166,14 @@ mod tests {
 
     #[test]
     fn test_prefix_sums() {
-        let test_values = vec![1, 2, 10, 100, 111, 9, 219];
+        let test_values = vec![0, 1, 2, 10, 100, 111, 9, 219];
 
         for n in test_values {
+            println!("Input value:\t\t{}", n);
             let ref_val = reference(n);
-            let val = run_calculation(ref_val);
+            println!("Reference Value:\t{}", ref_val);
+            let val = run_calculation(n);
+            println!("Output value:\t\t{}", val);
 
             assert_eq!(val, ref_val);
         }
