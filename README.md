@@ -41,6 +41,6 @@ This reformulation drastically reduces scaling, making the computation efficient
 [rust-badge]: https://img.shields.io/badge/Rust-%23000000.svg?e&logo=rust&logoColor=white
 [github-badge]: https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white
 [actions-badge]: https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white
-[rust-test-badge]: https://github.com/zwill22/xmlgenerator/actions/workflows/test.yml/badge.svg
+[rust-test-badge]: https://github.com/zwill22/big-sum/actions/workflows/test.yml/badge.svg
 [buy-me-coffee]: https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black
 [license-badge]: https://img.shields.io/github/license/zwill22/big-sum
